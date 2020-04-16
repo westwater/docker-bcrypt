@@ -2,8 +2,6 @@
 
 set -e
 
-echo "Generate Bcrypt Hashed Passwords"
-
 usage(){
     echo "usage: [-r ROUNDS] [-p PASSWORD]"
     exit 1
@@ -21,6 +19,7 @@ shift "$(($OPTIND -1))"
 ROUNDS=${ROUNDS:-10}
 
 if [[ -z "${PASSWORD}" ]]; then
+    echo "Generate Bcrypt Hashed Password"
     hashed=$(htpasswd -nBC ${ROUNDS} "")
 else
     hashed=$(htpasswd -nbBC ${ROUNDS} "" "${PASSWORD}")
